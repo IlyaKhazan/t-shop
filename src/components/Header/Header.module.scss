@@ -1,0 +1,40 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 35px;
+  border-bottom: 1px solid #eaeaea;
+
+  img {
+    margin-right: 15px;
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+
+  h2,
+  p {
+    margin: 0;
+  }
+}
+
+.infoRight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin-right: 30px;
+    cursor: pointer;
+  }
+}
+
+.totalCost {
+  color: #5c5c5c;
+  font-weight: 500;
+  opacity: 0.5;
+}
