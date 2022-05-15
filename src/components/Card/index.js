@@ -5,7 +5,7 @@ function Card(props) {
   const [isAdded, setIsAdded] = useState(true);
 
   const onPlusClick = () => {
-    setIsAdded(!isAdded);
+    setIsAdded((added) => !added);
   };
 
   return (
