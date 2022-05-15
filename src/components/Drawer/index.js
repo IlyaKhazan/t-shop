@@ -1,6 +1,6 @@
 import styles from './Drawer.module.scss';
 
-function Drawer(props) {
+function Drawer({ onClose, cartItems }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -8,7 +8,7 @@ function Drawer(props) {
           Корзина
           <img
             className={styles.removeBtn}
-            onClick={props.onClose}
+            onClick={onClose}
             width={32}
             height={32}
             src="img/icons/btn-remove.svg"
@@ -16,118 +16,24 @@ function Drawer(props) {
           />
         </h2>
         <div className={styles.drawerItems}>
-          <div className={styles.cartItem}>
-            <img width={65} height={65} src="img/items/1.jpg" alt="Фото товара" />
-            <div className={styles.cartWrapper}>
-              <p className={styles.itemTitle}>Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className={styles.priceValue}>11 000р</p>
-            </div>
-            <img
-              className={styles.removeBtn}
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/2.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/3.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/4.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/4.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/4.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/4.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
-          <div className="cartItem">
-            <img width={65} height={65} src="img/items/4.jpg" alt="Фото товара" />
-            <div className="cartWrapper">
-              <p className="itemTitle">Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <p className="priceValue">11 000р</p>
-            </div>
-            <img
-              className="removeBtn"
-              width={32}
-              height={32}
-              src="img/icons/btn-remove.svg"
-              alt="Удалить"
-            />
-          </div>
+          {cartItems.map((el) => {
+            return (
+              <div className={styles.cartItem}>
+                <img width={65} height={65} src={el.imgSrc} alt="Фото товара" />
+                <div className={styles.cartWrapper}>
+                  <p className={styles.itemTitle}>{el.title}</p>
+                  <p className={styles.priceValue}>{el.price}</p>
+                </div>
+                <img
+                  className={styles.removeBtn}
+                  width={32}
+                  height={32}
+                  src="img/icons/btn-remove.svg"
+                  alt="Удалить"
+                />
+              </div>
+            );
+          })}
         </div>
         <div className={styles.cartAmountBlock}>
           <ul>
