@@ -117,3 +117,31 @@
 .cartWrapper {
   margin: 0 15px;
 }
+
+.cartFull {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cartEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .mainButton {
+    img {
+      left: 30px;
+    }
+
+    &:hover {
+      background-color: #aad377;
+
+      img {
+        transform: translateX(-5px);
+      }
+    }
+  }
+}
