@@ -6,6 +6,8 @@ function Home({
   onSearchClear,
   onSearchChange,
   items,
+  cartItems,
+  favorites,
   onAddToCart,
   onAddToFavorites,
 }) {
@@ -34,12 +36,12 @@ function Home({
           .filter((el) => el.title.toLowerCase().includes(searchValue.toLowerCase()))
           .map((el) => (
             <Card
-              id={el.id}
+              key={el.id}
               onPlus={(obj) => onAddToCart(obj)}
               onFavorite={(obj) => onAddToFavorites(obj)}
-              title={el.title}
-              price={el.price}
-              imgSrc={el.imgSrc}
+              added={cartItems.some((item) => Number(item.id) === Number(el.id))}
+              liked={favorites.some((item) => Number(item.id) === Number(el.id))}
+              {...el}
             />
           ))}
       </div>
