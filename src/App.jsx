@@ -80,7 +80,15 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ items, favorites, checkItemAdded }}>
+    <AppContext.Provider
+      value={{
+        items,
+        favorites,
+        checkItemAdded,
+        setCartOpened,
+        cartItems,
+        setCartItems,
+      }}>
       <div className="container">
         <Header onCartClick={() => setCartOpened(true)} />
         {cartOpened && (
