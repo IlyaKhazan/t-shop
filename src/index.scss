@@ -25,6 +25,12 @@ body {
   padding: 0 70px;
 }
 
+.loadingContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
 .contentWrapper {
   padding: 35px 0;
 

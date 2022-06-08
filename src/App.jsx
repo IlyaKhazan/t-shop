@@ -12,6 +12,7 @@ function App() {
   const [favorites, setFavorites] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -22,6 +23,8 @@ function App() {
         'https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/',
       );
       const itemsResponse = await axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/items/');
+
+      setIsLoading(false);
 
       setCartItems(cartItemsResponse.data);
       setFavorites(favoritesResponse.data);
@@ -93,6 +96,7 @@ function App() {
               favorites={favorites}
               onAddToCart={onAddToCart}
               onAddToFavorites={onAddToFavorites}
+              loading={isLoading}
             />
           }
         />

@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import styles from './Card.module.scss';
 
-function Card({ title, price, imgSrc, onPlus, onFavorite, id, liked = false, added = false }) {
+function Card({
+  title,
+  price,
+  imgSrc,
+  onPlus,
+  onFavorite,
+  id,
+  loading,
+  liked = false,
+  added = false,
+}) {
   const [isAdded, setIsAdded] = useState(added);
   const [isFavorite, setIsFavorite] = useState(liked);
 
