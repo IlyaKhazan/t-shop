@@ -1,6 +1,15 @@
+import React from 'react';
 import styles from './Drawer.module.scss';
+import Info from '../Info';
+import { AppContext } from '../../App';
 
-function Drawer({ onClose, cartItems, onRemove }) {
+function Drawer({ onClose, onRemove }) {
+  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const [isOrdered, setIsOrdered] = React.useState(false);
+  const onOrderClick = () => {
+    setCartItems([]);
+    setIsOrdered((ordered) => !ordered);
+  };
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -51,23 +60,20 @@ function Drawer({ onClose, cartItems, onRemove }) {
                   <span>850р</span>
                 </li>
 
-                <button className={styles.mainButton}>
+                <button className={styles.mainButton} onClick={() => onOrderClick()}>
                   Оплатить <img width={20} height={20} src="img/icons/arrow.svg" alt="" />
                 </button>
               </ul>
             </div>
           </div>
         ) : (
-          <div className={styles.cartEmpty}>
-            {/* Корзина пустая */}
-            <img width={120} height={120} src={'/img/cart-empty.png'} alt="Пустая корзина" />
-            <h2>Корзина пустая</h2>
-            <p>Добавьте хотя бы один товар, чтобы сделать заказ</p>
-            <button onClick={onClose} className={styles.mainButton}>
-              <img width={20} height={20} src="img/icons/arrow-back.svg" alt="" />
-              Назад к покупкам
-            </button>
-          </div>
+          <Info
+            imgSrc={isOrdered ? '/img/order.png' : '/img/cart-empty.png'}
+            title={isOrdered ? 'Заказ оформлен' : 'Корзина пустая'}
+            description={
+              isOrdered ? 'Ваш заказ оформлен!' : 'Добавьте хотя бы один товар, чтобы сделать заказ'
+            }
+          />
         )}
       </div>
     </div>

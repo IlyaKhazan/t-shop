@@ -14,7 +14,7 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = f
     setIsFavorite((liked) => !liked);
     onFavorite({ title, price, imgSrc, id });
   };
-  console.log(title, id, checkItemAdded(id));
+
   return (
     <div className={styles.card}>
       <button className={styles.button} onClick={onFavoriteClick}>
