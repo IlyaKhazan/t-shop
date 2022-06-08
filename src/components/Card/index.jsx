@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Card.module.scss';
+import { AppContext } from '../../App';
 
-function Card({
-  title,
-  price,
-  imgSrc,
-  onPlus,
-  onFavorite,
-  id,
-  loading,
-  liked = false,
-  added = false,
-}) {
-  const [isAdded, setIsAdded] = useState(added);
+function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = false }) {
+  const { checkItemAdded } = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(liked);
 
   const onPlusClick = () => {
-    setIsAdded((added) => !added);
     onPlus({ title, price, imgSrc, id });
   };
 
@@ -24,7 +14,7 @@ function Card({
     setIsFavorite((liked) => !liked);
     onFavorite({ title, price, imgSrc, id });
   };
-
+  console.log(title, id, checkItemAdded(id));
   return (
     <div className={styles.card}>
       <button className={styles.button} onClick={onFavoriteClick}>
@@ -46,7 +36,7 @@ function Card({
           <img
             width={32}
             height={32}
-            src={isAdded ? 'img/icons/btn-checked.svg' : 'img/icons/btn-plus.svg'}
+            src={checkItemAdded(id) ? 'img/icons/btn-checked.svg' : 'img/icons/btn-plus.svg'}
             alt="В корзину"
           />
         </button>

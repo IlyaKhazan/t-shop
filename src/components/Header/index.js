@@ -10,7 +10,7 @@ function Header(props) {
           <img width={40} height={40} src="img/logo.png" alt="Логотип магазина" />
           <div className={styles.logoInfo}>
             <h2>T-Shop</h2>
-            <p>Магазин путешествий</p>
+            <p>Магазин кроссовок</p>
           </div>
         </div>
       </Link>
