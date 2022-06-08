@@ -25,7 +25,6 @@ function Home({
             onPlus={(obj) => onAddToCart(obj)}
             onFavorite={(obj) => onAddToFavorites(obj)}
             loading={loading}
-            added={cartItems.some((item) => Number(item.id) === Number(el.id))}
             liked={favorites.some((item) => Number(item.id) === Number(el.id))}
             {...el}
           />
