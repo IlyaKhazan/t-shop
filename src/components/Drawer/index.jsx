@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Drawer.module.scss';
 import Info from '../Info';
-import { AppContext } from '../../App';
 import axios from 'axios';
+import { useCart } from '../../hooks/useCart';
 
 function Drawer({ onClose, onRemove }) {
-  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const { cartItems, setCartItems, totalAmount } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOrdered, setIsOrdered] = React.useState(false);
   const [orderId, setOrderId] = React.useState('');
@@ -72,14 +72,19 @@ function Drawer({ onClose, onRemove }) {
             <div className={styles.cartAmountBlock}>
               <ul>
                 <li>
-                  <span>Итого:</span>
+                  <span>Стоимость товаров:</span>
                   <div className={styles.dashedElement}></div>
-                  <span>17 000р</span>
+                  <span>{totalAmount} руб.</span>
                 </li>
                 <li>
-                  <span>Налог 5%:</span>
+                  <span>НДС 20%:</span>
                   <div className={styles.dashedElement}></div>
-                  <span>850р</span>
+                  <span>{totalAmount * 0.2} руб.</span>
+                </li>
+                <li>
+                  <span>Итого:</span>
+                  <div className={styles.dashedElement}></div>
+                  <span>{totalAmount * 1.2} руб.</span>
                 </li>
 
                 <button

@@ -1,8 +1,10 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { useCart } from '../../hooks/useCart';
 
-function Header(props) {
+function Header({ onCartClick }) {
+  const { totalAmount } = useCart();
   return (
     <header>
       <Link to="/">
@@ -15,9 +17,9 @@ function Header(props) {
         </div>
       </Link>
       <ul className={styles.infoRight}>
-        <li onClick={props.onCartClick}>
+        <li onClick={onCartClick}>
           <img width={20} height={20} src="img/icons/cart.svg" alt="Корзина" />
-          <span className={styles.totalCost}>1500р</span>
+          <span className={styles.totalCost}>{totalAmount} руб.</span>
         </li>
         <li>
           <img width={20} height={20} src="img/icons/user.svg" alt="Личный кабинет" />
