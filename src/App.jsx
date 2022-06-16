@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import Orders from './pages/Orders';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import { Route, Routes } from 'react-router-dom';
@@ -119,6 +120,7 @@ function App() {
             path="/favorites"
             element={<Favorites onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites} />}
           />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

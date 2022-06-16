@@ -18,12 +18,14 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = f
   return (
     <div className={styles.card}>
       <button className={styles.button} onClick={onFavoriteClick}>
-        <img
-          width={32}
-          height={32}
-          src={isFavorite ? 'img/icons/like-on.svg' : 'img/icons/like-off.svg'}
-          alt="Выбрать"
-        />
+        {onFavorite && (
+          <img
+            width={32}
+            height={32}
+            src={isFavorite ? 'img/icons/like-on.svg' : 'img/icons/like-off.svg'}
+            alt="Выбрать"
+          />
+        )}
       </button>
       <img width={135} height={120} src={imgSrc} alt="Фото товара" />
       <p className={styles.itemTitle}>{title}</p>
@@ -33,12 +35,14 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = f
           <p className={styles.priceValue}>{`${price} руб.`}</p>
         </div>
         <button className={styles.button} onClick={onPlusClick}>
-          <img
-            width={32}
-            height={32}
-            src={checkItemAdded(id) ? 'img/icons/btn-checked.svg' : 'img/icons/btn-plus.svg'}
-            alt="В корзину"
-          />
+          {onPlus && (
+            <img
+              width={32}
+              height={32}
+              src={checkItemAdded(id) ? 'img/icons/btn-checked.svg' : 'img/icons/btn-plus.svg'}
+              alt="В корзину"
+            />
+          )}
         </button>
       </div>
     </div>
