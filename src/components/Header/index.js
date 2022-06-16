@@ -22,7 +22,9 @@ function Header({ onCartClick }) {
           <span className={styles.totalCost}>{totalAmount} руб.</span>
         </li>
         <li>
-          <img width={20} height={20} src="img/icons/user.svg" alt="Личный кабинет" />
+          <Link to="/orders">
+            <img width={20} height={20} src="img/icons/user.svg" alt="Заказы" />
+          </Link>
         </li>
         <li>
           <Link to="/favorites">
