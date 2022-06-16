@@ -4,7 +4,7 @@ import Info from '../Info';
 import axios from 'axios';
 import { useCart } from '../../hooks/useCart';
 
-function Drawer({ onClose, onRemove }) {
+function Drawer({ onClose, onRemove, opened }) {
   const { cartItems, setCartItems, totalAmount } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOrdered, setIsOrdered] = React.useState(false);
@@ -33,7 +33,7 @@ function Drawer({ onClose, onRemove }) {
     setIsLoading(!isLoading);
   };
   return (
-    <div className={styles.overlay}>
+    <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
       <div className={styles.drawer}>
         <h2>
           Корзина
@@ -86,7 +86,6 @@ function Drawer({ onClose, onRemove }) {
                   <div className={styles.dashedElement}></div>
                   <span>{totalAmount * 1.2} руб.</span>
                 </li>
-
                 <button
                   className={styles.mainButton}
                   onClick={() => onOrderClick()}
