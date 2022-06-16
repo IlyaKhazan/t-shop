@@ -92,13 +92,12 @@ function App() {
       }}>
       <div className="container">
         <Header onCartClick={() => setCartOpened(true)} />
-        {cartOpened && (
-          <Drawer
-            cartItems={cartItems}
-            onClose={() => setCartOpened(false)}
-            onRemove={(id) => onRemoveFromCart(id)}
-          />
-        )}
+        <Drawer
+          cartItems={cartItems}
+          onClose={() => setCartOpened(false)}
+          onRemove={(id) => onRemoveFromCart(id)}
+          opened={cartOpened}
+        />
         <Routes>
           <Route
             path="/"
