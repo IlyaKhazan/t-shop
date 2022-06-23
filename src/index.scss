@@ -43,7 +43,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 50px 0;
+  padding-top: 15px;
   gap: 30px;
 }
 
@@ -54,12 +54,25 @@ body {
   padding: 0 15px;
   display: flex;
   align-items: center;
+  align-self: flex-end;
+  margin-left: 25px;
+  margin-top: 25px;
 
   input {
     border: none;
     font-size: 15px;
     padding: 15px;
     outline: none;
+  }
+}
+
+.innerWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
   }
 }
 

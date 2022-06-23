@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import styles from './Filter.module.scss';
 
+import Tab from '../Tab';
+
 const Filter = ({ activeCollection, setActiveCollection, items, setFiltered }) => {
   useEffect(() => {
     if (activeCollection === 0) {
@@ -10,35 +12,38 @@ const Filter = ({ activeCollection, setActiveCollection, items, setFiltered }) =
     }
     const filteredItems = items.filter((item) => item.collection === activeCollection);
     setFiltered(filteredItems);
-  }, [activeCollection]);
+  }, [activeCollection, items, setFiltered]);
 
   return (
     <div className={styles.filter}>
-      <button
-        className={activeCollection === 0 ? 'active' : null}
-        onClick={() => setActiveCollection(0)}>
-        Все
-      </button>
-      <button
-        className={activeCollection === 1 ? 'active' : null}
-        onClick={() => setActiveCollection(1)}>
-        Кино
-      </button>
-      <button
-        className={activeCollection === 2 ? 'active' : null}
-        onClick={() => setActiveCollection(2)}>
-        Животные
-      </button>
-      <button
-        className={activeCollection === 3 ? 'active' : null}
-        onClick={() => setActiveCollection(3)}>
-        Авто
-      </button>
-      <button
-        className={activeCollection === 4 ? 'active' : null}
-        onClick={() => setActiveCollection(4)}>
-        Разное
-      </button>
+      <h2>Коллекции:</h2>
+      <div className={styles.filterWrapper}>
+        <Tab
+          onTab={(collection) => setActiveCollection(collection)}
+          collection={0}
+          activeCollection={activeCollection}
+        />
+        <Tab
+          onTab={(collection) => setActiveCollection(collection)}
+          collection={1}
+          activeCollection={activeCollection}
+        />
+        <Tab
+          onTab={(collection) => setActiveCollection(collection)}
+          collection={2}
+          activeCollection={activeCollection}
+        />
+        <Tab
+          onTab={(collection) => setActiveCollection(collection)}
+          collection={3}
+          activeCollection={activeCollection}
+        />
+        <Tab
+          onTab={(collection) => setActiveCollection(collection)}
+          collection={4}
+          activeCollection={activeCollection}
+        />
+      </div>
     </div>
   );
 };
