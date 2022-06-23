@@ -29,8 +29,8 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, l
       <button className={styles.button} onClick={onFavoriteClick}>
         {onFavorite && (
           <img
-            width={32}
-            height={32}
+            width={25}
+            height={25}
             src={checkItemLiked(mainId) ? 'img/icons/like-on.png' : 'img/icons/like-off.png'}
             alt="Выбрать"
           />
