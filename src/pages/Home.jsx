@@ -39,30 +39,31 @@ function Home({
   };
   return (
     <div className="contentWrapper">
-      {' '}
-      <Filter
-        items={items}
-        activeCollection={activeCollection}
-        setActiveCollection={setActiveCollection}
-        setFiltered={setFiltered}
-      />
-      <div className="titleWrapper">
-        <h1>{searchValue ? `Вы ищете ${searchValue}` : 'Все товары'}</h1>
-        <div className="searchWrapper">
-          <img width={20} height={20} src="img/icons/search.svg" alt="Поиск товара" />
-          {searchValue && (
-            <img
-              className="searchClearBtn"
-              onClick={onSearchClear}
-              width={20}
-              height={20}
-              src="img/icons/btn-remove.svg"
-              alt="Очистить"
-            />
-          )}
-          <input onChange={onSearchChange} value={searchValue} placeholder="Введите товар..." />
+      <div className="innerWrapper">
+        <Filter
+          items={items}
+          activeCollection={activeCollection}
+          setActiveCollection={setActiveCollection}
+          setFiltered={setFiltered}
+        />{' '}
+        <div className="titleWrapper">
+          <div className="searchWrapper">
+            <img width={20} height={20} src="img/icons/search.svg" alt="Поиск товара" />
+            {searchValue && (
+              <img
+                className="searchClearBtn"
+                onClick={onSearchClear}
+                width={20}
+                height={20}
+                src="img/icons/btn-remove.svg"
+                alt="Очистить"
+              />
+            )}
+            <input onChange={onSearchChange} value={searchValue} placeholder="Введите товар..." />
+          </div>{' '}
         </div>
-      </div>
+      </div>{' '}
+      <p>{searchValue && `Вы ищете: ${searchValue}`}</p>
       <motion.div layout className="cardsWrapper">
         <AnimatePresence>{renderItems()}</AnimatePresence>
       </motion.div>

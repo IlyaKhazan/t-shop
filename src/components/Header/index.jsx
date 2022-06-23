@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useCart } from '../../hooks/useCart';
+import convertPrice from '../../utils';
 
 function Header({ onCartClick }) {
   const { totalAmount } = useCart();
@@ -29,7 +30,7 @@ function Header({ onCartClick }) {
         </li>
         <li onClick={onCartClick}>
           <img width={20} height={20} src="img/icons/cart.svg" alt="Корзина" />
-          <span className={styles.totalCost}>{totalAmount} руб.</span>
+          <span className={styles.totalCost}>{convertPrice(totalAmount)}</span>
         </li>
       </ul>
     </header>

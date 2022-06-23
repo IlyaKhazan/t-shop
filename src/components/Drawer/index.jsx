@@ -3,6 +3,7 @@ import styles from './Drawer.module.scss';
 import Info from '../Info';
 import axios from 'axios';
 import { useCart } from '../../hooks/useCart';
+import convertPrice from '../../utils';
 
 function Drawer({ onClose, onRemove, opened }) {
   const { cartItems, setCartItems, totalAmount } = useCart();
@@ -74,17 +75,12 @@ function Drawer({ onClose, onRemove, opened }) {
                 <li>
                   <span>Стоимость товаров:</span>
                   <div className={styles.dashedElement}></div>
-                  <span>{totalAmount} руб.</span>
+                  <span>{convertPrice(totalAmount)}</span>
                 </li>
                 <li>
                   <span>НДС 20%:</span>
                   <div className={styles.dashedElement}></div>
-                  <span>{totalAmount * 0.2} руб.</span>
-                </li>
-                <li>
-                  <span>Итого:</span>
-                  <div className={styles.dashedElement}></div>
-                  <span>{totalAmount * 1.2} руб.</span>
+                  <span>{convertPrice(totalAmount * 0.2)} </span>
                 </li>
                 <button
                   className={styles.mainButton}

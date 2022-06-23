@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Card.module.scss';
 import { AppContext } from '../../App';
 import { motion } from 'framer-motion';
+import convertPrice from '../../utils';
 
 function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, liked = false }) {
   const { checkItemAdded } = React.useContext(AppContext);
@@ -39,7 +40,7 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, l
       <p className={styles.itemTitle}>{title}</p>
       <div className={styles.infoWrapper}>
         <div className={styles.priceWrapper}>
-          <p className={styles.priceValue}>{`${price} руб.`}</p>
+          <p className={styles.priceValue}>{convertPrice(price)}</p>
         </div>
         <button className={styles.button} onClick={onPlusClick}>
           {onPlus && (
