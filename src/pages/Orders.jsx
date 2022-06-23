@@ -40,7 +40,7 @@ function Orders({ onAddToCart, onAddToFavorites }) {
           <Info
             title={'Заказов нет'}
             description="Закажите хотя бы одну футболку"
-            imgSrc={'../img/icons/no-orders-m.png'}
+            imgSrc={'img/icons/no-orders-m.png'}
           />
         )}
       </div>

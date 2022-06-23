@@ -45,7 +45,7 @@ function Home({
           activeCollection={activeCollection}
           setActiveCollection={setActiveCollection}
           setFiltered={setFiltered}
-        />{' '}
+        />
         <div className="titleWrapper">
           <div className="searchWrapper">
             <img width={20} height={20} src="img/icons/search.svg" alt="Поиск товара" />
@@ -60,9 +60,9 @@ function Home({
               />
             )}
             <input onChange={onSearchChange} value={searchValue} placeholder="Введите товар..." />
-          </div>{' '}
+          </div>
         </div>
-      </div>{' '}
+      </div>
       <p className="searchValue">{searchValue && `Вы ищете: ${searchValue}`}</p>
       <motion.div layout className="cardsWrapper">
         <AnimatePresence>{renderItems()}</AnimatePresence>

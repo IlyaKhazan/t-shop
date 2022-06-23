@@ -8,12 +8,6 @@ import { API_URL } from '../utils';
 function Favorites({ onAddToCart, onAddToFavorites }) {
   const { favorites, setFavorites } = React.useContext(AppContext);
 
-  const onFavClick = () => {
-    // setCartOpened(false);
-    // document.body.style.overflow = 'visible';
-    console.log(2323);
-  };
-
   const clearFavorites = async () => {
     setFavorites([]);
     for (let i = 0; i < favorites.length; i++) {
@@ -54,7 +48,6 @@ function Favorites({ onAddToCart, onAddToFavorites }) {
               title={'Закладок нет'}
               description="Добавьте хотя бы одну закладку"
               imgSrc={'../img/icons/no-likes-m.png'}
-              onClick={() => onFavClick()}
             />
           </div>
         )}
