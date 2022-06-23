@@ -21,7 +21,7 @@ function Header({ onCartClick }) {
       </Link>
       <ul className={styles.menuBar}>
         <li>
-          <Link to="/favorites">
+          <Link to="favorites">
             {favorites.length > 0 ? (
               <img width={32} height={32} src="img/icons/like-on.png" alt="Закладки" />
             ) : (
@@ -30,7 +30,7 @@ function Header({ onCartClick }) {
           </Link>
         </li>
         <li>
-          <Link to="/orders">
+          <Link to="orders">
             <img width={32} height={32} src="img/icons/order.png" alt="Заказы" />
           </Link>
         </li>

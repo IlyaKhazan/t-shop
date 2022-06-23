@@ -46,10 +46,10 @@ function App() {
     try {
       if (findItem) {
         setCartItems((prev) => prev.filter((item) => Number(item.mainId) !== Number(obj.mainId)));
-        await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${findItem.id}`);
+        await axios.delete(`${API_URL}/cart/${findItem.id}`);
       } else {
         setCartItems((prev) => [...prev, obj]);
-        const { data } = await axios.post('https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/', obj);
+        const { data } = await axios.post(`${API_URL}/cart/`, obj);
         setCartItems((prev) =>
           prev.map((item) => {
             if (Number(item.mainId) === Number(data.mainId)) {
@@ -160,10 +160,10 @@ function App() {
             }
           />
           <Route
-            path="/favorites"
+            path="favorites"
             element={<Favorites onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites} />}
           />
-          <Route path="/orders" element={<Orders />} />
+          <Route path="orders" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

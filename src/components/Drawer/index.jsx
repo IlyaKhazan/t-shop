@@ -101,7 +101,7 @@ function Drawer({ onClose, onRemove, opened }) {
           </div>
         ) : (
           <Info
-            imgSrc={isOrdered ? '/img/icons/ordered-m.png' : '/img/icons/cart-empty-m.png'}
+            imgSrc={isOrdered ? 'img/icons/ordered-m.png' : 'img/icons/cart-empty-m.png'}
             title={isOrdered ? 'Заказ оформлен' : 'Корзина пустая'}
             description={
               isOrdered
