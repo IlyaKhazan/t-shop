@@ -142,7 +142,7 @@ function App() {
         />
         <Routes>
           <Route
-            path="/"
+            path=""
             element={
               <Home
                 searchValue={searchValue}
