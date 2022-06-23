@@ -1,8 +1,11 @@
+@import '../../colors.scss';
+
 header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 35px 0;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--color-light-grey-100);
 
   img {
     margin-right: 15px;
@@ -20,7 +23,7 @@ header {
 }
 
 .logoInfo {
-  color: black;
+  color: var(--color-secondary);
 }
 
 .menuBar {
@@ -38,7 +41,7 @@ header {
 }
 
 .totalCost {
-  color: #5c5c5c;
+  color: var(--color-secondary);
   font-weight: 500;
   opacity: 0.5;
 }

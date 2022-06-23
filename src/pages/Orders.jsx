@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
+import Info from '../components/Info';
+import { API_URL } from '../utils';
 
 function Orders({ onAddToCart, onAddToFavorites }) {
   const [orders, setOrders] = React.useState([]);
@@ -10,7 +12,7 @@ function Orders({ onAddToCart, onAddToFavorites }) {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/orders/');
+        const { data } = await axios.get(`${API_URL}/orders/`);
         console.log(data);
         setOrders(data.map((orders) => orders.items).flat());
         setIsLoading(false);
@@ -30,10 +32,16 @@ function Orders({ onAddToCart, onAddToFavorites }) {
       <div className="cardsWrapper">
         {isLoading ? (
           <div className="loadingContainer">{Array(20).fill([<MyLoader />])}</div>
-        ) : (
+        ) : orders.length > 0 ? (
           orders.map((el) => (
-            <Card id={el.id} title={el.title} price={el.price} imgSrc={el.imgSrc} />
+            <Card key={el.mainId} id={el.id} title={el.title} price={el.price} imgSrc={el.imgSrc} />
           ))
+        ) : (
+          <Info
+            title={'Заказов нет'}
+            description="Закажите хотя бы одну футболку"
+            imgSrc={'../img/icons/no-orders-m.png'}
+          />
         )}
       </div>
     </div>

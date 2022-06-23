@@ -1,3 +1,5 @@
+@import '../../t-shop/src/colors.scss';
+
 * {
   box-sizing: border-box;
   font-family: 'Mulish', sans-serif;
@@ -10,15 +12,16 @@ a {
 body {
   padding: 5%;
   margin: 0;
+  color: var(--color-text);
   font-family: 'Mulish', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: beige;
+  background-color: var(--color-bg-blue);
 }
 
 .container {
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
   max-width: 1200px;
@@ -49,7 +52,7 @@ body {
 
 .searchWrapper {
   position: relative;
-  border: 1px solid #f3f3f3;
+  border: 1px solid var(--color-grey);
   border-radius: 10px;
   padding: 0 15px;
   display: flex;
@@ -73,7 +76,14 @@ body {
 
   h2 {
     margin: 0;
+    padding-left: 25px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 300;
   }
+}
+.searchValue {
+  padding-left: 25px;
 }
 
 .searchClearBtn {
@@ -92,42 +102,17 @@ body {
   width: 30%;
 }
 
-.clearButton {
-  position: relative;
-  width: 200px;
-  height: 55px;
-  background-color: inherit;
-  border-radius: 15px;
-  border: solid 1px #84c238;
+.favClearBtn {
+  width: 10rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
   font-size: 16px;
-  margin-top: 40px;
-  color: #84c238;
-  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-
-  img {
-    position: absolute;
-    right: 30px;
-    top: 17px;
-    transition: transform 0.2s ease-in-out;
-  }
-
-  &:disabled {
-    background-color: #474646;
-    cursor: default;
-    animation: btn-loading 3s ease-in-out infinite;
-    &:hover {
-      background-color: #474646;
-    }
-  }
-
   &:hover {
-    border-color: black;
-
-    img {
-      transform: translateX(5px);
-    }
+    background: var(--color-accent);
   }
 }
 

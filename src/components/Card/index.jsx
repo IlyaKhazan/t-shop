@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Card.module.scss';
 import { AppContext } from '../../App';
 import { motion } from 'framer-motion';
-import convertPrice from '../../utils';
+import { convertPrice } from '../../utils';
 
 function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, liked = false }) {
   const { checkItemAdded } = React.useContext(AppContext);

@@ -5,6 +5,7 @@ import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
+import { API_URL } from './utils';
 import { Route, Routes } from 'react-router-dom';
 export const AppContext = React.createContext({});
 
@@ -21,9 +22,9 @@ function App() {
     async function fetchData() {
       try {
         const [cartItemsResponse, favoritesResponse, itemsResponse] = await Promise.all([
-          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/'),
-          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/'),
-          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/items/'),
+          axios.get(`${API_URL}/cart/`),
+          axios.get(`${API_URL}/favorites/`),
+          axios.get(`${API_URL}/items/`),
         ]);
 
         setIsLoading(false);
@@ -68,15 +69,10 @@ function App() {
     try {
       if (findFavorite) {
         setFavorites((prev) => prev.filter((fav) => Number(fav.mainId) !== Number(obj.mainId)));
-        await axios.delete(
-          `https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/${findFavorite.id}`,
-        );
+        await axios.delete(`${API_URL}/favorites/${findFavorite.id}`);
       } else {
         setFavorites((prev) => [...prev, obj]);
-        const { data } = await axios.post(
-          'https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/',
-          obj,
-        );
+        const { data } = await axios.post(`${API_URL}/favorites/`, obj);
         setFavorites((prev) =>
           prev.map((fav) => {
             if (Number(fav.mainId) === Number(data.mainId)) {
@@ -94,7 +90,7 @@ function App() {
   const onRemoveFromCart = async (id) => {
     try {
       setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
-      await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${id}`);
+      await axios.delete(`${API_URL}/cart/${id}`);
     } catch (error) {
       alert('Не удалось удалить товар из корзины');
     }

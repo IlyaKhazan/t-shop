@@ -1,23 +1,19 @@
 import React from 'react';
 import styles from './Info.module.scss';
-import { AppContext } from '../../App';
+import { Link } from 'react-router-dom';
 
-const Info = ({ title, imgSrc, description, alt }) => {
-  const { setCartOpened } = React.useContext(AppContext);
+const Info = ({ title, imgSrc, description, alt, onClick }) => {
   return (
-    <div className={styles.cartEmpty}>
-      <img width={120} height={120} src={imgSrc} alt={alt} />
+    <div className={styles.blockEmpty}>
+      <img width={128} height={128} src={imgSrc} alt={alt} />
       <h2>{title}</h2>
       <p>{description}</p>
-      <button
-        onClick={() => {
-          setCartOpened(false);
-          document.body.style.overflow = 'visible';
-        }}
-        className={styles.mainButton}>
-        <img width={20} height={20} src="img/icons/arrow-back.svg" alt="" />
-        Назад к покупкам
-      </button>
+      <Link to="/">
+        <button className={styles.mainButton} onClick={onClick}>
+          <img width={20} height={20} src="img/icons/arrow-back.svg" alt="" />
+          Назад к покупкам
+        </button>
+      </Link>
     </div>
   );
 };

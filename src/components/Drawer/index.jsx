@@ -3,18 +3,25 @@ import styles from './Drawer.module.scss';
 import Info from '../Info';
 import axios from 'axios';
 import { useCart } from '../../hooks/useCart';
-import convertPrice from '../../utils';
+import { convertPrice, API_URL } from '../../utils';
+import { AppContext } from '../../App';
 
 function Drawer({ onClose, onRemove, opened }) {
   const { cartItems, setCartItems, totalAmount } = useCart();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOrdered, setIsOrdered] = React.useState(false);
   const [orderId, setOrderId] = React.useState('');
+  const { setCartOpened } = React.useContext(AppContext);
+
+  const onCartBackClick = () => {
+    setCartOpened(false);
+    document.body.style.overflow = 'visible';
+  };
 
   const onOrderClick = async () => {
     setIsLoading(!isLoading);
     try {
-      const { data } = await axios.post('https://627dfa7a271f386cefeeb5ea.mockapi.io/orders', {
+      const { data } = await axios.post(`${API_URL}/orders`, {
         items: cartItems,
       });
       const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -25,7 +32,7 @@ function Drawer({ onClose, onRemove, opened }) {
 
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${item.id}`);
+        await axios.delete(`${API_URL}/cart/${item.id}`);
         await delay(1000);
       }
     } catch (error) {
@@ -94,13 +101,14 @@ function Drawer({ onClose, onRemove, opened }) {
           </div>
         ) : (
           <Info
-            imgSrc={isOrdered ? '/img/order.png' : '/img/cart-empty.png'}
+            imgSrc={isOrdered ? '/img/icons/ordered-m.png' : '/img/icons/cart-empty-m.png'}
             title={isOrdered ? 'Заказ оформлен' : 'Корзина пустая'}
             description={
               isOrdered
                 ? `Спасибо! Номер вашего заказа: #${orderId}`
                 : 'Добавьте хотя бы один товар, чтобы сделать заказ'
             }
+            onClick={() => onCartBackClick()}
           />
         )}
       </div>

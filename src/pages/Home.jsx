@@ -28,7 +28,7 @@ function Home({
         .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
         .map((item) => (
           <Card
-            key={item.id}
+            key={item.mainId}
             onPlus={(obj) => onAddToCart(obj)}
             onFavorite={(obj) => onAddToFavorites(obj)}
             loading={loading}
@@ -63,7 +63,7 @@ function Home({
           </div>{' '}
         </div>
       </div>{' '}
-      <p>{searchValue && `Вы ищете: ${searchValue}`}</p>
+      <p className="searchValue">{searchValue && `Вы ищете: ${searchValue}`}</p>
       <motion.div layout className="cardsWrapper">
         <AnimatePresence>{renderItems()}</AnimatePresence>
       </motion.div>

@@ -3,15 +3,22 @@ import { AppContext } from '../App';
 import axios from 'axios';
 import Card from '../components/Card';
 import Info from '../components/Info';
+import { API_URL } from '../utils';
 
 function Favorites({ onAddToCart, onAddToFavorites }) {
   const { favorites, setFavorites } = React.useContext(AppContext);
+
+  const onFavClick = () => {
+    // setCartOpened(false);
+    // document.body.style.overflow = 'visible';
+    console.log(2323);
+  };
 
   const clearFavorites = async () => {
     setFavorites([]);
     for (let i = 0; i < favorites.length; i++) {
       const item = favorites[i];
-      await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/${item.id}`);
+      await axios.delete(`${API_URL}/favorites/${item.id}`);
       const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
       await delay(1000);
     }
@@ -21,14 +28,17 @@ function Favorites({ onAddToCart, onAddToFavorites }) {
     <div className="contentWrapper">
       <div className="titleWrapper">
         <h1>Мои закладки</h1>
-        <button className="clearButton" onClick={() => clearFavorites()}>
-          Очистить
-        </button>
+        {favorites.length > 0 && (
+          <button className="favClearBtn" onClick={() => clearFavorites()}>
+            Удалить закладки
+          </button>
+        )}
       </div>
       <div className="cardsWrapper">
         {favorites.length > 0 ? (
           favorites.map((el) => (
             <Card
+              key={el.mainId}
               id={el.id}
               onPlus={(obj) => onAddToCart(obj)}
               onFavorite={(obj) => onAddToFavorites(obj)}
@@ -42,8 +52,9 @@ function Favorites({ onAddToCart, onAddToFavorites }) {
           <div className="infoWrapper">
             <Info
               title={'Закладок нет'}
-              description="Добавьте хоть одну закладку"
-              imgSrc={'../img/no-favorites.png'}
+              description="Добавьте хотя бы одну закладку"
+              imgSrc={'../img/icons/no-likes-m.png'}
+              onClick={() => onFavClick()}
             />
           </div>
         )}
