@@ -55,3 +55,9 @@
   font-size: 15px;
   margin: 0;
 }
+
+@media (max-width: 650px) {
+  .infoWrapper {
+    justify-content: space-around;
+  }
+}
