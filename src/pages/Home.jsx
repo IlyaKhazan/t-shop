@@ -1,39 +1,51 @@
 import React from 'react';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
+import Filter from '../components/Filter';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Home({
   searchValue,
   onSearchClear,
   onSearchChange,
   items,
+  setItems,
+  filtered,
+  setFiltered,
   loading,
   cartItems,
   favorites,
   onAddToCart,
   onAddToFavorites,
 }) {
+  const [activeCollection, setActiveCollection] = React.useState(0);
+
   const renderItems = () => {
     return loading ? (
       <div className="loadingContainer">{Array(20).fill([<MyLoader />])}</div>
     ) : (
-      items
-        .filter((el) => el.title.toLowerCase().includes(searchValue.toLowerCase()))
-        .map((el) => (
+      filtered
+        .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        .map((item) => (
           <Card
-            key={el.id}
+            key={item.id}
             onPlus={(obj) => onAddToCart(obj)}
             onFavorite={(obj) => onAddToFavorites(obj)}
             loading={loading}
-            liked={favorites.some((item) => Number(item.id) === Number(el.id))}
-            {...el}
+            {...item}
           />
         ))
     );
   };
-
   return (
     <div className="contentWrapper">
+      {' '}
+      <Filter
+        items={items}
+        activeCollection={activeCollection}
+        setActiveCollection={setActiveCollection}
+        setFiltered={setFiltered}
+      />
       <div className="titleWrapper">
         <h1>{searchValue ? `Вы ищете ${searchValue}` : 'Все товары'}</h1>
         <div className="searchWrapper">
@@ -51,7 +63,9 @@ function Home({
           <input onChange={onSearchChange} value={searchValue} placeholder="Введите товар..." />
         </div>
       </div>
-      <div className="cardsWrapper">{renderItems()}</div>
+      <motion.div layout className="cardsWrapper">
+        <AnimatePresence>{renderItems()}</AnimatePresence>
+      </motion.div>
     </div>
   );
 }

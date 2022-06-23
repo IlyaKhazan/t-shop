@@ -11,6 +11,7 @@ export const AppContext = React.createContext({});
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [filtered, setFiltered] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
@@ -18,53 +19,84 @@ function App() {
 
   React.useEffect(() => {
     async function fetchData() {
-      const cartItemsResponse = await axios.get(
-        'https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/',
-      );
-      const favoritesResponse = await axios.get(
-        'https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/',
-      );
-      const itemsResponse = await axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/items/');
+      try {
+        const [cartItemsResponse, favoritesResponse, itemsResponse] = await Promise.all([
+          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/'),
+          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/'),
+          axios.get('https://627dfa7a271f386cefeeb5ea.mockapi.io/items/'),
+        ]);
 
-      setIsLoading(false);
+        setIsLoading(false);
 
-      setCartItems(cartItemsResponse.data);
-      setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        setCartItems(cartItemsResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+        setFiltered(itemsResponse.data);
+      } catch (error) {
+        alert('Не удалось получить данные');
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
-    if (cartItems.some((item) => Number(item.id) === Number(obj.id))) {
-      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
-    } else {
-      axios.post('https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/', obj);
-      setCartItems((prev) => [...prev, obj]);
+  const onAddToCart = async (obj) => {
+    const findItem = cartItems.find((item) => Number(item.mainId) === Number(obj.mainId));
+    try {
+      if (findItem) {
+        setCartItems((prev) => prev.filter((item) => Number(item.mainId) !== Number(obj.mainId)));
+        await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${findItem.id}`);
+      } else {
+        setCartItems((prev) => [...prev, obj]);
+        const { data } = await axios.post('https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/', obj);
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (Number(item.mainId) === Number(data.mainId)) {
+              return { ...item, id: data.id };
+            }
+            return item;
+          }),
+        );
+      }
+    } catch (error) {
+      alert('Не удалось добавить товар в корзину');
     }
   };
 
-  const onRemoveFromCart = (id) => {
-    setCartItems((prev) => [...prev]);
-    axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
-  };
-
   const onAddToFavorites = async (obj) => {
+    const findFavorite = favorites.find((fav) => Number(fav.mainId) === Number(obj.mainId));
     try {
-      if (favorites.some((fav) => Number(fav.id) === Number(obj.id))) {
-        axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/${obj.id}`);
-        setFavorites((prev) => prev.filter((fav) => Number(fav.id) !== Number(obj.id)));
+      if (findFavorite) {
+        setFavorites((prev) => prev.filter((fav) => Number(fav.mainId) !== Number(obj.mainId)));
+        await axios.delete(
+          `https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/${findFavorite.id}`,
+        );
       } else {
+        setFavorites((prev) => [...prev, obj]);
         const { data } = await axios.post(
           'https://627dfa7a271f386cefeeb5ea.mockapi.io/favorites/',
           obj,
         );
-        setFavorites((prev) => [...prev, data]);
+        setFavorites((prev) =>
+          prev.map((fav) => {
+            if (Number(fav.mainId) === Number(data.mainId)) {
+              return { ...fav, id: data.id };
+            }
+            return fav;
+          }),
+        );
       }
     } catch (error) {
-      alert('Не удалось добавить в избранное');
+      alert('Не удалось добавить товар в избранное');
+    }
+  };
+
+  const onRemoveFromCart = async (id) => {
+    try {
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
+      await axios.delete(`https://627dfa7a271f386cefeeb5ea.mockapi.io/cart/${id}`);
+    } catch (error) {
+      alert('Не удалось удалить товар из корзины');
     }
   };
 
@@ -77,7 +109,11 @@ function App() {
   };
 
   const checkItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.mainId) === Number(id));
+  };
+
+  const checkItemLiked = (id) => {
+    return favorites.some((obj) => Number(obj.mainId) === Number(id));
   };
 
   return (
@@ -85,16 +121,26 @@ function App() {
       value={{
         items,
         favorites,
+        setFavorites,
         checkItemAdded,
+        checkItemLiked,
         setCartOpened,
         cartItems,
         setCartItems,
       }}>
       <div className="container">
-        <Header onCartClick={() => setCartOpened(true)} />
+        <Header
+          onCartClick={() => {
+            setCartOpened(true);
+            document.body.style.overflow = 'hidden';
+          }}
+        />
         <Drawer
           cartItems={cartItems}
-          onClose={() => setCartOpened(false)}
+          onClose={() => {
+            setCartOpened(false);
+            document.body.style.overflow = 'visible';
+          }}
           onRemove={(id) => onRemoveFromCart(id)}
           opened={cartOpened}
         />
@@ -112,6 +158,8 @@ function App() {
                 onAddToCart={onAddToCart}
                 onAddToFavorites={onAddToFavorites}
                 loading={isLoading}
+                filtered={filtered}
+                setFiltered={setFiltered}
               />
             }
           />

@@ -30,7 +30,7 @@ function Drawer({ onClose, onRemove, opened }) {
     } catch (error) {
       alert('Ошибка отправки заказа');
     }
-    setIsLoading(!isLoading);
+    setIsLoading((loading) => !loading);
   };
   return (
     <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>

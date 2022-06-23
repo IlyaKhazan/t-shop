@@ -9,7 +9,12 @@ const Info = ({ title, imgSrc, description, alt }) => {
       <img width={120} height={120} src={imgSrc} alt={alt} />
       <h2>{title}</h2>
       <p>{description}</p>
-      <button onClick={() => setCartOpened(false)} className={styles.mainButton}>
+      <button
+        onClick={() => {
+          setCartOpened(false);
+          document.body.style.overflow = 'visible';
+        }}
+        className={styles.mainButton}>
         <img width={20} height={20} src="img/icons/arrow-back.svg" alt="" />
         Назад к покупкам
       </button>

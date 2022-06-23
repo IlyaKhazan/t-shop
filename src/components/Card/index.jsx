@@ -1,37 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import styles from './Card.module.scss';
 import { AppContext } from '../../App';
+import { motion } from 'framer-motion';
 
-function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = false }) {
+function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, liked = false }) {
   const { checkItemAdded } = React.useContext(AppContext);
-  const [isFavorite, setIsFavorite] = useState(liked);
+  const { checkItemLiked } = React.useContext(AppContext);
+
+  const itemObj = { title, price, imgSrc, id, mainId, parentId: id };
 
   const onPlusClick = () => {
-    onPlus({ title, price, imgSrc, id });
+    onPlus(itemObj);
   };
 
   const onFavoriteClick = () => {
-    setIsFavorite((liked) => !liked);
-    onFavorite({ title, price, imgSrc, id });
+    onFavorite(itemObj);
   };
 
   return (
-    <div className={styles.card}>
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      layout
+      className={styles.card}>
       <button className={styles.button} onClick={onFavoriteClick}>
         {onFavorite && (
           <img
             width={32}
             height={32}
-            src={isFavorite ? 'img/icons/like-on.svg' : 'img/icons/like-off.svg'}
+            src={checkItemLiked(mainId) ? 'img/icons/like-on.png' : 'img/icons/like-off.png'}
             alt="Выбрать"
           />
         )}
       </button>
-      <img width={135} height={120} src={imgSrc} alt="Фото товара" />
+      <img width={168} height={180} src={imgSrc} alt="Фото футболки" />
       <p className={styles.itemTitle}>{title}</p>
       <div className={styles.infoWrapper}>
         <div className={styles.priceWrapper}>
-          <p className={styles.priceTitle}>Цена:</p>
           <p className={styles.priceValue}>{`${price} руб.`}</p>
         </div>
         <button className={styles.button} onClick={onPlusClick}>
@@ -39,13 +46,13 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, loading, liked = f
             <img
               width={32}
               height={32}
-              src={checkItemAdded(id) ? 'img/icons/btn-checked.svg' : 'img/icons/btn-plus.svg'}
+              src={checkItemAdded(mainId) ? 'img/icons/btn-checked.png' : 'img/icons/btn-plus.png'}
               alt="В корзину"
             />
           )}
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
