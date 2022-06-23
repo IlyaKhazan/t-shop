@@ -7,4 +7,6 @@ const convertPrice = (price) => {
   );
 };
 
-export default convertPrice;
+const API_URL = 'https://627dfa7a271f386cefeeb5ea.mockapi.io';
+
+export { convertPrice, API_URL };

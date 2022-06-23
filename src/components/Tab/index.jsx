@@ -21,7 +21,7 @@ const Tab = ({ activeCollection, collection, onTab }) => {
       className={classNames(styles.tab)}
       onClick={() => onTab(collection)}
       initial={{ color: '#000' }}
-      animate={{ color: isSelected ? '#0063dc' : '#000' }}>
+      animate={{ color: isSelected ? '#006ff7' : '#000' }}>
       {collectionNames[collection]}
       {isSelected && <ActiveLine />}
     </motion.div>

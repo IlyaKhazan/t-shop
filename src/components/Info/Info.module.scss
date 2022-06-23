@@ -1,8 +1,10 @@
-.cartEmpty {
+@import '../../colors.scss';
+.blockEmpty {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   height: 100%;
 
   .mainButton {
@@ -11,7 +13,7 @@
     }
 
     &:hover {
-      background-color: #aad377;
+      background-color: var(--color-light-blue);
 
       img {
         transform: translateX(-5px);
@@ -22,14 +24,14 @@
 
 .mainButton {
   position: relative;
-  width: 100%;
+  width: 18rem;
   height: 55px;
-  background-color: #84c238;
+  background-color: var(--color-primary);
   border-radius: 15px;
   border: none;
   font-size: 16px;
   margin-top: 40px;
-  color: #f3f3f3;
+  color: var(--color-white);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -42,14 +44,10 @@
   }
 
   &:hover {
-    background-color: #aad377;
+    background-color: var(--color-accent);
 
     img {
       transform: translateX(5px);
     }
-  }
-
-  &:active {
-    background-color: #528d0a;
   }
 }
