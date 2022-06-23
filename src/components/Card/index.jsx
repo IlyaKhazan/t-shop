@@ -45,8 +45,8 @@ function Card({ title, price, imgSrc, onPlus, onFavorite, id, mainId, loading, l
         <button className={styles.button} onClick={onPlusClick}>
           {onPlus && (
             <img
-              width={32}
-              height={32}
+              width={25}
+              height={25}
               src={checkItemAdded(mainId) ? 'img/icons/btn-checked.png' : 'img/icons/btn-plus.png'}
               alt="В корзину"
             />
