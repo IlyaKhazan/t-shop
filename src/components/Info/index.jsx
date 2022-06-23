@@ -8,7 +8,7 @@ const Info = ({ title, imgSrc, description, alt, onClick }) => {
       <img width={128} height={128} src={imgSrc} alt={alt} />
       <h2>{title}</h2>
       <p>{description}</p>
-      <Link to="">
+      <Link to="/">
         <button className={styles.mainButton} onClick={onClick}>
           <img width={20} height={20} src="img/icons/arrow-back.svg" alt="Назад к покупкам" />
           Назад к покупкам

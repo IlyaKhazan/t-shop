@@ -47,7 +47,7 @@ function Favorites({ onAddToCart, onAddToFavorites }) {
             <Info
               title={'Закладок нет'}
               description="Добавьте хотя бы одну закладку"
-              imgSrc={'../img/icons/no-likes-m.png'}
+              imgSrc={'img/icons/no-likes-m.png'}
             />
           </div>
         )}
