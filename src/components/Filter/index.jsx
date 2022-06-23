@@ -16,34 +16,31 @@ const Filter = ({ activeCollection, setActiveCollection, items, setFiltered }) =
 
   return (
     <div className={styles.filter}>
-      <h2>Коллекции:</h2>
-      <div className={styles.filterWrapper}>
-        <Tab
-          onTab={(collection) => setActiveCollection(collection)}
-          collection={0}
-          activeCollection={activeCollection}
-        />
-        <Tab
-          onTab={(collection) => setActiveCollection(collection)}
-          collection={1}
-          activeCollection={activeCollection}
-        />
-        <Tab
-          onTab={(collection) => setActiveCollection(collection)}
-          collection={2}
-          activeCollection={activeCollection}
-        />
-        <Tab
-          onTab={(collection) => setActiveCollection(collection)}
-          collection={3}
-          activeCollection={activeCollection}
-        />
-        <Tab
-          onTab={(collection) => setActiveCollection(collection)}
-          collection={4}
-          activeCollection={activeCollection}
-        />
-      </div>
+      <Tab
+        onTab={(collection) => setActiveCollection(collection)}
+        collection={0}
+        activeCollection={activeCollection}
+      />
+      <Tab
+        onTab={(collection) => setActiveCollection(collection)}
+        collection={1}
+        activeCollection={activeCollection}
+      />
+      <Tab
+        onTab={(collection) => setActiveCollection(collection)}
+        collection={2}
+        activeCollection={activeCollection}
+      />
+      <Tab
+        onTab={(collection) => setActiveCollection(collection)}
+        collection={3}
+        activeCollection={activeCollection}
+      />
+      <Tab
+        onTab={(collection) => setActiveCollection(collection)}
+        collection={4}
+        activeCollection={activeCollection}
+      />
     </div>
   );
 };

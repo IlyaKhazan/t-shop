@@ -39,6 +39,7 @@ function Home({
   };
   return (
     <div className="contentWrapper">
+      <h1>Коллекции</h1>
       <div className="innerWrapper">
         <Filter
           items={items}
