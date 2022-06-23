@@ -149,6 +149,12 @@
   height: 80%;
 }
 
+@media (max-width: 650px) {
+  .drawer {
+    width: 100%;
+  }
+}
+
 @keyframes btn-loading {
   100% {
     opacity: 1;

@@ -1,0 +1,24 @@
+.filter {
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  justify-items: flex-start;
+
+  button {
+    width: 70px;
+    height: 30px;
+    background-color: #84c238;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    margin-top: 40px;
+    color: #f3f3f3;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+}
+
+.active {
+  background-color: #c23838;
+}
