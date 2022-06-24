@@ -63,7 +63,7 @@ function Drawer({ onClose, onRemove, opened }) {
                     <img width={65} height={65} src={el.imgSrc} alt="Фото товара" />
                     <div className={styles.cartWrapper}>
                       <p className={styles.itemTitle}>{el.title}</p>
-                      <p className={styles.priceValue}>{el.price}</p>
+                      <p className={styles.priceValue}>{convertPrice(el.price)}</p>
                     </div>
                     <img
                       className={styles.removeBtn}
@@ -82,7 +82,7 @@ function Drawer({ onClose, onRemove, opened }) {
                 <li>
                   <span>Стоимость товаров:</span>
                   <div className={styles.dashedElement}></div>
-                  <span>{convertPrice(totalAmount)}</span>
+                  <span className={styles.priceValue}>{convertPrice(totalAmount)}</span>
                 </li>
                 <li>
                   <span>НДС 20%:</span>

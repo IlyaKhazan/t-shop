@@ -24,6 +24,18 @@
   }
 }
 
+.priceValue {
+  margin: 0;
+  font-weight: bold;
+  color: var(--color-secondary);
+}
+
+.itemTitle {
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0;
+}
+
 .overlay {
   position: absolute;
   top: 0;

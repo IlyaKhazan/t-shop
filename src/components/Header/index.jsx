@@ -36,9 +36,9 @@ function Header({ onCartClick }) {
         </li>
         <li onClick={onCartClick}>
           {cartItems.length > 0 ? (
-            <img width={32} height={32} src="img/icons/cart.png" alt="Закладки" />
+            <img width={32} height={32} src="img/icons/cart.png" alt="Корзина" />
           ) : (
-            <img width={32} height={32} src="img/icons/cart-empty.png" alt="Закладки" />
+            <img width={32} height={32} src="img/icons/cart-empty.png" alt="Корзина" />
           )}
           <span className={styles.totalCost}>{convertPrice(totalAmount)}</span>
         </li>
